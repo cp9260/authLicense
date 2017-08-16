@@ -232,10 +232,10 @@ function getTable(data) {
                 var data = temp[i];
                 // console.info(temp[i][0]);
                 html += '<tr id="show_tab_tr" idx="' + i + '" >' +
-                    '<td key="pkey"><input  type="text" value="' + data.pkey + '"  disabled ></td>' +
-                    '<td key="name"><input  type="text" value="' + data.name + '"  disabled ></td>' +
-                    '<td key="imageUrl" ><input  type="text" value="' + data.imageUrl + '" disabled  ></td>' +
-                    '<td key="beizhu" ><input  type="text" value="' + data.beizhu + '" disabled  ></td>' +
+                    '<td key="pkey" title="'+data.pkey+'"><input  type="text" value="' + data.pkey + '"  disabled ></td>' +
+                    '<td key="name" title="'+data.name+'"><input  type="text" value="' + data.name + '"  disabled ></td>' +
+                    '<td key="imageUrl" title="'+data.imageUrl+'" ><input  type="text" value="' + data.imageUrl + '" disabled  ></td>' +
+                    '<td key="beizhu"  title="'+data.beizhu+'"><input  type="text" value="' + data.beizhu + '" disabled  ></td>' +
                     '<td><input id="center" style="display: inline-block;float:left;width:40px;color:#12a9ef;" kepp="dianji" type="button" value="编辑"> &nbsp &nbsp' +
                     '<input type="button" class = "remove" style="display: inline-block;float:right; width:40px; color:#12a9ef;" det="detlet"   value="删除" ></td>' +
                     '</tr>';

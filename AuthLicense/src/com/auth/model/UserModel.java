@@ -44,12 +44,13 @@ public class UserModel {
 	}
 
 	public UserModel(int pkey2, String userName2, String password2,
-			String mobile2, String email2) {
+			String mobile2, String email2,int status) {
 		this.pkey = pkey2;
 		this.userName = userName2;
 		this.password = password2;
 		this.mobile = mobile2;
 		this.email = email2;
+		this.status = status;
 	}
 
 	public UserModel(int pkey2) {

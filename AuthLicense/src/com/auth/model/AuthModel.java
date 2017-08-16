@@ -29,7 +29,7 @@ public class AuthModel {
 	private String licenseKey;
 	
 	@Column(name = "status")
-	private String status;
+	private int status;
 	
 	@Column(name = "productId")
 	private String productId;
@@ -66,11 +66,11 @@ public class AuthModel {
 		this.licenseKey = licenseKey;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -100,7 +100,7 @@ public class AuthModel {
 	}
 
 	public AuthModel(int pkey, String userName, String ip, String domain,
-			String licenseKey, String status, String productId) {
+			String licenseKey, int status, String productId) {
 		super();
 		this.pkey = pkey;
 		this.userName = userName;
@@ -112,13 +112,23 @@ public class AuthModel {
 	}
 
 	public AuthModel(String userName, String ip, String domain,
-			String licenseKey, String status, String productId) {
+			String licenseKey, int status, String productId) {
 		super();
 		this.userName = userName;
 		this.ip = ip;
 		this.domain = domain;
 		this.licenseKey = licenseKey;
 		this.status = status;
+		this.productId = productId;
+	}
+
+	public AuthModel(String userName, String ip, String domain,
+			String licenseKey, String productId) {
+		super();
+		this.userName = userName;
+		this.ip = ip;
+		this.domain = domain;
+		this.licenseKey = licenseKey;
 		this.productId = productId;
 	}
 	

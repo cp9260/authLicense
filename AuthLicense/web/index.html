@@ -1,110 +1,99 @@
-<!DOCTYPE html PUBLIC>
-<html >
+<!doctype html>
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<title>互联网平台</title>
-	<link rel="stylesheet" href="css/style.css" type="text/css">
-	<link href="css/jquery-accordion-menu.css" rel="stylesheet" type="text/css" />
-	<link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
-
-	<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
-	<script src="js/jquery-accordion-menu.js" type="text/javascript"></script>
-	<script type="text/javascript">
-
-		$(function(){	
-			//顶部导航切换
-			$("#demo-list li").click(function(){
-				$("#demo-list li.active").removeClass("active");
-				
-				$(this).addClass("active");
-			})	
-		})	
-	</script>
-
+    <meta charset="utf-8">
+    <title>主页</title>
+    <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="js/index.js" type="text/javascript"></script>
+    <script src="js/jquery.tabso_yeso.js" type="text/javascript"></script>
+    <link href="css/footer.css" type="text/css" rel="stylesheet">
+    <link href="css/common.css" type="text/css" rel="stylesheet">
+    <!--<script type="text/javascript" src="js/jquery.1.4.2-min.js"></script>-->
+    <link href="css/lanrenzhijia.css" type="text/css" rel="stylesheet" />
 </head>
 
-
 <body>
-	<div class="top">授权网站管理系统</div>
-	<div>
-		<div class="sidebar"style="" >
-			<div id="jquery-accordion-menu" class="jquery-accordion-menu red" style="">
-				<ul id="demo-list">
-				 
-				 <!--   <li class="active"><a href="#"><i class="icon">&#xe608;</i>主页</a></li> -->
-					<li class="user active"><a href="#"><i class="icon">&#xe60d;</i>用户管理 </a>
-					<!-- 	<ul class="submenu">
-									<li  class="navh"><a href="#">会员管理</a></li>
-									<li class="navz" ><a href="#"></a></li>
-								</ul> -->
-					</li>
-					<li class="license"><a href="#"><i class="icon">&#xe645;</i></i>授权管理</a></li>
-					<li class="product"><a href="#"><i class="icon">&#xe645;</i></i>产品管理</a></li>
-					<li class="form"><a href="#"><i class="icon">&#xe65c;</i>认证记录</a></li>
-			
-					<li class="time"><a href="#"><i class="icon">&#xe65f;</i>系统管理</a>
-						<ul class="submenu">
-							<li class="data"><a href="#">网站设置 </a></li>
-							<li class="progress"><a href="#">备份日志</a></li>
-							
 
-						</ul>
-					</li>
-				   
-				</ul>
-		
-			</div>	
+<div style="width:100%; height: 80px; text-align: center;background: rgba(33, 37, 34, 0.10) url(images/logo.png) 10px no-repeat; ">
+    <br/>
+    <div style="font:32px/30px 'Trebuchet MS', Arial, Helvetica, sans-serif;border-top: 2px;display:inline">专业游戏授权网站</div>
+    <div style=" text-align: right;display:inline;float:right;font:18px/22px 'Trebuchet MS', Arial, Helvetica, sans-serif;margin-right: 20px;"> <a href="register.jsp">注册</a> <a href="login.jsp">登录  </a></div>
 
-		</div>
-		<iframe src="user.html" class="content" frameborder="0"></iframe>
-	</div>
-	<script type="text/javascript">
-		(function($) {
-		$.expr[":"].Contains = function(a, i, m) {
-			return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-		};
-		function filterList(header, list) {
-			//@header 头部元素
-			//@list 无需列表
-			//创建一个搜素表单
-			var form = $("<form>").attr({
-				"class":"filterform",
-				action:"#"
-			}), input = $("<input>").attr({
-				"class":"filterinput",
-				type:"text"
-			});
-			$(form).append(input).appendTo(header);
-			$(input).change(function() {
-				var filter = $(this).val();
-				if (filter) {
-					$matches = $(list).find("a:Contains(" + filter + ")").parent();
-					$("li", list).not($matches).slideUp();
-					$matches.slideDown();
-				} else {
-					$(list).find("li").slideDown();
-				}
-				return false;
-			}).keyup(function() {
-				$(this).change();
-			});
-		}
-		$(function() {
-			filterList($("#form"), $("#demo-list"));
-		});
+</div>
+<div class="demo">
+    <h2>实例1、上下滑动选项卡切换</h2>
+    <ul class="tabbtn" id="move-animate-top">
+        <li class="current"><a>电子游戏</a></li>
+        <li><a>棋牌游戏</a></li>
+        <li><a>益智游戏</a></li>
+        <li><a>VR游戏</a></li>
+    </ul><!--tabbtn end-->
+    <div class="tabcon" id="topcon">
+        <div class="subbox">
+            <div class="sublist">
+                <ul>
+                    <li><span>▪</span>福利彩票软件</a></li>
+                    &nbsp;&nbsp;&nbsp;&nbsp;jquery表格变色隔行变色鼠标滑过竖直表格内容变色效果
+                    &nbsp;&nbsp;jquery表格变色隔行变色鼠标滑过竖直表格内容变色效果
+                    &nbsp;&nbsp;jquery表格变色隔行变色鼠标滑过竖直表格内容变色效果
+                    &nbsp;&nbsp;jquery表格变色隔行变色鼠标滑过竖直表格内容变色效果
 
-		$(".user"  ).click(function(){  $(".content").attr("src","user.html");	});
-        $(".product"  ).click(function(){  $(".content").attr("src","product.html");	});
-        $(".license"  ).click(function(){  $(".content").attr("src","license.html");	});
+                    <li><span>▪</span>jQuery浮动层点击图标按钮关闭或展开</a></li>
+                    <li><span>▪</span>jquery浮动定位层导航描点上下滚动的浮动导航</a></li>
+                    <li><span>▪</span>div css3样式表制作jquery返回顶部特效</a></li>
+                    <li><span>▪</span>jquery 表格插件控制表格表格内容拖动标题固定在顶部</a></li>
+                    <li><span>▪</span>jquery表格可编辑修改表格里面的数值</a></li>
+                </ul>
+            </div><!--tabcon end-->
+            <div class="sublist">
+                <ul>
+                    <li><span>▪</span>js lazyload实现网页图片延迟加载特效</li>
+                    <li><span>▪</span>js图片切换插件带滤镜百叶窗图片js幻灯片切换特效</li>
+                    <li><span>▪</span>js图片特效制作js焦点图上下滚动slider切换效果</a></li>
+                    <li><span>▪</span>javascript图片特效 网站banner制作焦点图片切换带按钮和固定图标控制图片左右滚动</li>
+                    <li><span>▪</span>js文字切换特效制作焦点文字带滤镜切换效果</li>
+                    <li><span>▪</span>js文字特效制作js文字闪烁与文字变色效果</li>
+                </ul>
+            </div><!--tabcon end-->
+            <div class="sublist">
+                <ul>
+                    <li><span>▪</span>div+css制作在IE6 上用absolute模拟fixed IE6浏览器定位层框不闪动</li>
+                    <li><span>▪</span>CSS如何定位工程</li>
+                    <li><span>▪</span>div+css导航菜单用CSS样式表处理斜角导航条</li>
+                    <li><span>▪</span>用div+css3美化制作动画导航特效鼠标滑过动画显示</li>
+                    <li><span>▪</span>css3垂直滑动手风琴导航菜单多种手风琴演示</li>
+                    <li><span>▪</span>css3教程应用css3 transform属性 图片旋转与盒投影+鼠标悬停效果</li>
+                </ul>
+            </div><!--tabcon end-->
+            <div class="sublist">
+                <ul>
+                    <li><span>▪</span>jquery 图片特效用CSS3和HTML5制作仿动画头条报纸缩小到放大翻转图片展示</li>
+                    <li><span>▪</span>jquery 幻灯片切换应用一个HTML5的幻灯片</li>
+                    <li><span>▪</span>jquery 图片滚动特效应用旋转幻灯片使用jQuery和CSS3</li>
+                    <li><span>▪</span>jquery html5 canvas 图表插件获取表格数据值生成走势图</li>
+                    <li><span>▪</span>jquery select框应用jquery ui滑块slider制作日期时间进度条</li>
+                    <li><span>▪</span>jquery progress bar进度条插件，投票进度条系统</li>
+                </ul>
+            </div><!--tabcon end-->
+        </div><!--tabcon end-->
+    </div>
+</div>
 
-		})(jQuery);	
-	</script>
+    <div class="footer">
+    <ul class="top">
+        <li class="span1">资金安全,客户(四年)零投诉!</li>
+        <li class="span2">客服QQ：123456789</li>
+        <li class="span3">工作时间：8:30-18:00</li>
+        <li class="span4">目前我们合作机构有: 27 家</li>
+    </ul>
+    <div class="down">
+        <p class="p02">Copyright © 2015 - 2016  版权所有 翻版必究</p></div>
+</div>
 
-	<script type="text/javascript">
-
-		jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
-		
-	</script>
-		
+<!--<div style="text-align:center;clear:both;">
+    <script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
+    <script src="/follow.js" type="text/javascript"></script>
+</div>-->
 </body>
 </html>
+

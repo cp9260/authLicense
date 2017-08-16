@@ -1,4 +1,4 @@
-package com.auth.controller;
+package com.auth.admin.controller;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.auth.admin.service.ProductService;
 import com.auth.model.ProductModel;
 import com.auth.model.UserModel;
-import com.auth.service.ProductService;
 
 @Controller
 public class ProductController {
@@ -65,5 +65,12 @@ public class ProductController {
 			return "error";
 		}
 		return "ok";
+	}
+	
+	@RequestMapping(value="/checkProduct")
+	@ResponseBody
+	public int getProductIDcheck(String productId){
+		
+		return productService.checkProductID(productId);
 	}
 }

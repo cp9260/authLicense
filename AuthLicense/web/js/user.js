@@ -28,72 +28,57 @@ $(function () {
             add[kay] = val;
 
         });
-        console.info(add);
+        if(add["userName"] == ""){
+            $("#labelName").html("帐号不能为空");
+            $("#labelName").show();
+            return;
+        }
+        if(add["password"] == "" || add["password"].length < 6){
+            $("#labelpassword").html("密码至少6位");
+            $("#labelpassword").show();
+            return;
+        }
         $.ajax({
-            url: "userAdminsave",
-            data: add,
-            type: "POST",
-            dataType: "text",
-            success: function (data) {
-                if (data == "ok") {alert("添加成功");location.reload();}
-                if (data == "error") {alert("添加失败")}
-                if (data == "2") {alert("该设备已存在")}
+            url:"checkUser",
+            data:{name:add["userName"]},
+            type:"POST",
+            dataType:"text",
+            success:function(data){
+                if(data !="-1")
+                {
+                    $("#labelName").html("帐号已存在");
+                    $("#labelName").show();
+                    return;
+                }else{
+                    $("#labelName").html("帐号可用");
+                }
+                $("#labelName").show();
+                $.ajax({
+                    url: "userAdminsave",
+                    data: add,
+                    type: "POST",
+                    dataType: "text",
+                    success: function (data) {
+                        if (data == "ok") {alert("添加成功");location.reload();}
+                        if (data == "error") {alert("添加失败")}
+                        if (data == "2") {alert("该设备已存在")}
+                    }
+                })
+
+
             }
-        })
+        });
+
+
+//            if(arry["userName"] == ""){
+//
+//            }
+        console.info(add);
+
     });
 });
 
-function getTh() {
-    $.ajax({
-        url: "http://192.168.0.89:8081/iot/selectSlientName",
-        //data:{pagenow:pagenow},
-        type: "Post",
-        contentType: "application/json; charset=utf-8",
-        dataType: "text",
-        success: function (contact) {
-            thData = JSON.parse(contact);
-            var s = ''
-            var f =''
-            var html = ''
-            var sear = ''
-            var zeng = ''
-            for (var key in thData) {
-                s += '<th>' + thData[key] + '</th>'
-                // console.info(thData);
-                // console.info(thData[key]);
-                if(key == "pkey"){
-                    continue;
-                }
-                zeng += '<p >' + thData[key] + '：<input type="text" value="" name="' + key + '" ></p> '
 
-                f+='<p>请输入' + thData[key] + ': <input  type="text"  name="' + key + '" value="" /> </p>'
-
-                //console.info(key);
-
-            }
-
-            //temp = thData.data;
-            //console.info(thData[key]);
-
-            //遍历json key 获取value
-            // sear += ''+f+' <input class="btn1"  type="button" value="查询" /> <a href="#" class="big-link" data-reveal-id="myModal"><input class="btn1" type="button" value="新增" /></a>'
-
-            html += ' <tr class="active" id="show_tab_one">' + s + ' <th>操作</th> </tr>'
-
-
-
-
-            $('thead').html(html);
-            $(".search").html(f);
-            $(".zeng").html(zeng);
-            //查询
-
-
-
-        }
-    });
-
-}
 
 //添加数据
 
@@ -136,15 +121,24 @@ function getenter() {
         td_arr=$(this).parent().siblings().children().val();
 
         $(this).attr("value", toEdit ? "保存" : "编辑");
-
         if (toEdit == false) {
+            var flag= true;
             $(this).parent().siblings().each(function (idx, ele) {
 
                 var td_arr = $(ele).children().val();
                 var key = $(this).attr("key");
                 arry[key] =td_arr;
 
+
+
             });
+            if(arry["status"] == "0" || arry["status"] == "1"){
+
+            }else{
+                $(this).attr("value", "保存");
+                alert("类型只能为1或者0");
+                return;;
+            }
 
             console.info(arry);
             $.ajax({
@@ -174,6 +168,7 @@ function getenter() {
             inputcss.css("border", "1px solid #51e5fb");
             $(this).parent().siblings('td[key="pkey"]').children().css("border", "0px solid #51e5fb");
             $(this).parent().siblings('td[key="pkey"]').children().attr("disabled", true);
+
         } else {
             inputcss.attr("disabled", true);
             inputcss.css("border", "0px solid #51e5fb");
@@ -303,12 +298,12 @@ function getTable(data) {
                 var data = temp[i];
                 // console.info(temp[i][0]);
                 html += '<tr id="show_tab_tr" idx="' + i + '" >' +
-                    '<td key="pkey"><input  type="text" value="' + data.pkey + '"  disabled ></td>' +
-                    '<td key="userName"><input  type="text" value="' + data.userName + '"  disabled ></td>' +
-                    '<td key="password" ><input  type="text" value="' + data.password + '" disabled  ></td>' +
-                    '<td key="mobile" ><input  type="text" value="' + data.mobile + '" disabled  ></td>' +
-                    '<td key="email" ><input  type="text" value="' + data.email + '" disabled  ></td>' +
-                    '<td key="status" ><input  type="text" value="' + data.status + '" disabled  ></td>' +
+                    '<td key="pkey" title="' + data.pkey +'"><input  type="text" value="' + data.pkey + '"  disabled ></td>' +
+                    '<td key="userName"  title="' + data.userName +'"><input  type="text" value="' + data.userName + '"  disabled ></td>' +
+                    '<td key="password" title="' + data.password +'" ><input  type="text" value="' + data.password + '" disabled  ></td>' +
+                    '<td key="mobile"  title="' + data.mobile +'"><input  type="text" value="' + data.mobile + '" disabled  ></td>' +
+                    '<td key="email"  title="' + data.email +'"><input  type="text" value="' + data.email + '" disabled  ></td>' +
+                    '<td key="status" title="' + data.status +'" ><input  type="text" value="' + data.status + '" disabled  ></td>' +
                     '<td><input id="center" style="display: inline-block;float:left;width:40px;color:#12a9ef;" kepp="dianji" type="button" value="编辑"> &nbsp &nbsp' +
                     '<input type="button" class = "remove" style="display: inline-block;float:right; width:40px; color:#12a9ef;" det="detlet"   value="删除" ></td>' +
                     '</tr>';

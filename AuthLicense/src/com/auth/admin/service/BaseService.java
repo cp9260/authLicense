@@ -1,4 +1,4 @@
-package com.auth.service;
+package com.auth.admin.service;
 
 import javax.annotation.Resource;
 

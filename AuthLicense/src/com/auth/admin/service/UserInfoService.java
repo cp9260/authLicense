@@ -1,4 +1,4 @@
-package com.auth.service;
+package com.auth.admin.service;
 
 import java.util.List;
 import java.util.Map;
@@ -64,6 +64,8 @@ public class UserInfoService extends BaseService{
 			table = "T_SYS_PRODUCT";
 		}else if (name.equals("license")){
 			table = "T_SYS_AUTH";
+		}else if (name.equals("order")){
+			table = "T_AUTH_ORDER";
 		}
 		String sql = "select count(1) as count from "+ table;
 		try{
@@ -86,5 +88,22 @@ public class UserInfoService extends BaseService{
 		}
 		return false;
 		
+	}
+
+
+	public int checkUserName(String name) {
+		
+		try{
+			
+			Map<String, Object> map = jdbcTemplate.queryForMap("Select pkey from T_USER_INFOS where userName=?", name);
+			if(map != null){
+				int temp = Integer.parseInt(map.get("pkey").toString());
+				return temp;
+			}
+			
+		}catch(Exception e){
+			return -1;
+		}
+		return -1;
 	}
 }

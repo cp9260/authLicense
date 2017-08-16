@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC>
+<html >
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>互联网平台</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link href="css/jquery-accordion-menu.css" rel="stylesheet" type="text/css" />
+	<link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
+
+	<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
+	<script src="js/jquery-accordion-menu.js" type="text/javascript"></script>
+	<script type="text/javascript">
+
+		$(function(){	
+			//顶部导航切换
+			$("#demo-list li").click(function(){
+				$("#demo-list li.active").removeClass("active");
+				
+				$(this).addClass("active");
+			})	
+		})	
+	</script>
+
+</head>
+
+
+<body>
+	<div class="top">授权网站管理系统</div>
+	<div>
+		<div class="sidebar"style="" >
+			<div id="jquery-accordion-menu" class="jquery-accordion-menu red" style="">
+				<ul id="demo-list">
+				 
+				 <!--   <li class="active"><a href="#"><i class="icon">&#xe608;</i>主页</a></li> -->
+					<li class="user active"><a href="#"><i class="icon">&#xe60d;</i>用户管理 </a>
+					<!-- 	<ul class="submenu">
+									<li  class="navh"><a href="#">会员管理</a></li>
+									<li class="navz" ><a href="#"></a></li>
+								</ul> -->
+					</li>
+					<li class="license"><a href="#"><i class="icon">&#xe645;</i></i>授权管理</a></li>
+					<li class="product"><a href="#"><i class="icon">&#xe645;</i></i>产品管理</a></li>
+					<li class="order"><a href="#"><i class="icon">&#xe65c;</i>订单管理</a></li>
+			
+					<li class="time"><a href="#"><i class="icon">&#xe65f;</i>系统管理</a>
+						<ul class="submenu">
+							<li class="data"><a href="#">网站设置 </a></li>
+							<li class="progress"><a href="#">备份日志</a></li>
+							
+
+						</ul>
+					</li>
+				   
+				</ul>
+		
+			</div>	
+
+		</div>
+		<iframe src="user.html" class="content" frameborder="0"></iframe>
+	</div>
+	<script type="text/javascript">
+		(function($) {
+		$.expr[":"].Contains = function(a, i, m) {
+			return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+		};
+		function filterList(header, list) {
+			//@header 头部元素
+			//@list 无需列表
+			//创建一个搜素表单
+			var form = $("<form>").attr({
+				"class":"filterform",
+				action:"#"
+			}), input = $("<input>").attr({
+				"class":"filterinput",
+				type:"text"
+			});
+			$(form).append(input).appendTo(header);
+			$(input).change(function() {
+				var filter = $(this).val();
+				if (filter) {
+					$matches = $(list).find("a:Contains(" + filter + ")").parent();
+					$("li", list).not($matches).slideUp();
+					$matches.slideDown();
+				} else {
+					$(list).find("li").slideDown();
+				}
+				return false;
+			}).keyup(function() {
+				$(this).change();
+			});
+		}
+		$(function() {
+			filterList($("#form"), $("#demo-list"));
+		});
+
+		$(".user"  ).click(function(){  $(".content").attr("src","user.html");	});
+        $(".product"  ).click(function(){  $(".content").attr("src","product.html");	});
+        $(".license"  ).click(function(){  $(".content").attr("src","license.html");	});
+        $(".order"  ).click(function(){  $(".content").attr("src","order.html");	});
+
+		})(jQuery);	
+	</script>
+
+	<script type="text/javascript">
+
+		jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+		
+	</script>
+		
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.auth.controller;
+package com.auth.admin.controller;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.auth.admin.service.LicenseService;
 import com.auth.model.AuthModel;
 import com.auth.model.ProductModel;
-import com.auth.service.LicenseService;
 
 @Controller
 public class AuthController {
@@ -37,8 +37,8 @@ public class AuthController {
 	@RequestMapping(value="/licenseSave")
 	@ResponseBody
 	public String saveLicense(String userName, String ip, String domain,
-			String licenseKey, String status, String productId){
-		AuthModel user  = new AuthModel(userName,ip,domain,licenseKey,status,productId);
+			String licenseKey, String productId){
+		AuthModel user  = new AuthModel(userName,ip,domain,licenseKey,productId);
 		user = licenseService.saveOrUpdate(user);
 		if(user == null){
 			return "error";
@@ -50,7 +50,7 @@ public class AuthController {
 	@RequestMapping(value="/licenseUpdate")
 	@ResponseBody
 	public String updateproduct(int pkey, String userName, String ip, String domain,
-			String licenseKey, String status, String productId){
+			String licenseKey, int status, String productId){
 		AuthModel user  = new AuthModel(pkey,userName,ip,domain,licenseKey,status,productId);
 		user = licenseService.saveOrUpdate(user);
 		if(user == null){

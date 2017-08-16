@@ -8,9 +8,13 @@ var len;         //总行数
 var page;        //总页数
 var arry = {};
 
-
+var saveUrl = "orderSave";
+var updateUrl = "orderUpdate";
+var deleteUrl = "orderDelete";
+var listUrl ="orders";
 
 $(function () {
+;
     //获取表头及搜索
     //getTh();
     //getchaxun();
@@ -30,6 +34,7 @@ $(function () {
             add[kay] = val;
 
         });
+
         if(add["userName"] == ""){
             alert("帐号不能为空");
             return;
@@ -53,9 +58,8 @@ $(function () {
             alert("产品不存在");
             return;
         }
-        console.info(add);
         $.ajax({
-            url: "licenseSave",
+            url: saveUrl,
             data: add,
             type: "POST",
             dataType: "text",
@@ -78,7 +82,7 @@ function getenter() {
     //var j = true;
     $('input[kepp="dianji"]').click(function () {
         //alert(toEdit);
-        var arry = {};
+        var arry = {}
         // var toEdit = $(this).attr("value") == "编辑";
         //     $(this).attr("value", toEdit ? "保存" : "编辑");
         // var index = $(this).parent().parent().attr("idx");
@@ -99,12 +103,11 @@ function getenter() {
                 arry[key] =td_arr;
 
             });
-
-            if(arry["status"] == "0" || arry["status"] == "1" || arry["status"] == "2"){
+            if(arry["status"] == "0" || arry["status"] == "1"){
 
             }else{
                 $(this).attr("value", "保存");
-                alert("类型只能为2、1或者0");
+                alert("类型只能为1或者0");
                 return;;
             }
             if(!checkUser(arry["userName"])){
@@ -119,7 +122,7 @@ function getenter() {
             }
             console.info(arry);
             $.ajax({
-                url:"licenseUpdate",
+                url:updateUrl,
                 data:arry,
                 type:"POST",
                 dataType:"text",
@@ -145,8 +148,8 @@ function getenter() {
             inputcss.css("border", "1px solid #51e5fb");
             $(this).parent().siblings('td[key="pkey"]').children().css("border", "0px solid #51e5fb");
             $(this).parent().siblings('td[key="pkey"]').children().attr("disabled", true);
-            $(this).parent().siblings('td[key="licenseKey"]').children().css("border", "0px solid #51e5fb");
-            $(this).parent().siblings('td[key="licenseKey"]').children().attr("disabled", true);
+            $(this).parent().siblings('td[key="orderTime"]').children().css("border", "0px solid #51e5fb");
+            $(this).parent().siblings('td[key="orderTime"]').children().attr("disabled", true);
         } else {
             inputcss.attr("disabled", true);
             inputcss.css("border", "0px solid #51e5fb");
@@ -245,7 +248,7 @@ function getTable(data) {
 
     $.ajax({
         url: "count",
-        data: { "name": "license" },
+        data: { "name": "order" },
         type: "Post",
         //contentType: "application/json; charset=utf-8",
         dataType: "text",
@@ -259,7 +262,7 @@ function getTable(data) {
     data[ "pagenow"] = pagenow;
     data[ "pagesize"] = pageSize;
     $.ajax({
-        url: "licenses",
+        url: listUrl,
         data: data,
         type: "Post",
         //contentType: "application/json; charset=utf-8",
@@ -276,13 +279,12 @@ function getTable(data) {
                 var data = temp[i];
                 // console.info(temp[i][0]);
                 html += '<tr id="show_tab_tr" idx="' + i + '" >' +
-                    '<td key="pkey" title="'+data.pkey+'"><input  type="text" value="' + data.pkey + '"  disabled ></td>' +
-                    '<td key="userName" title="'+data.userName+'"><input  type="text" value="' + data.userName + '"  disabled ></td>' +
-                    '<td key="productId" title="'+data.productId+'" ><input  type="text" value="' + data.productId + '" disabled  ></td>' +
-                    '<td key="ip" title="'+data.ip+'" ><input  type="text" value="' + data.ip + '" disabled  ></td>' +
-                    '<td key="domain" title="'+data.domain+'"><input  type="text" value="' + data.domain + '"  disabled ></td>' +
-                    '<td key="licenseKey"  title="'+data.licenseKey+'"><input  type="text" value="' + data.licenseKey + '" disabled  ></td>' +
-                    '<td key="status"  title="'+data.status+'"><input  type="text" value="' + data.status + '" disabled  ></td>' +
+                    '<td key="pkey"><input  type="text" value="' + data.pkey + '"  disabled ></td>' +
+                    '<td key="userName"><input  type="text" value="' + data.userName + '"  disabled ></td>' +
+                    '<td key="productId" ><input  type="text" value="' + data.productId + '" disabled  ></td>' +
+                    '<td key="price" ><input  type="text" value="' + data.price + '" disabled  ></td>' +
+                    '<td key="status" ><input  type="text" value="' + data.status + '" disabled  ></td>' +
+                    '<td key="orderTime" ><input  type="text" value="' + data.orderTime + '" disabled  ></td>' +
                     '<td><input id="center" style="display: inline-block;float:left;width:40px;color:#12a9ef;" kepp="dianji" type="button" value="编辑"> &nbsp &nbsp' +
                     '<input type="button" class = "remove" style="display: inline-block;float:right; width:40px; color:#12a9ef;" det="detlet"   value="删除" ></td>' +
                     '</tr>';
@@ -296,7 +298,7 @@ function getTable(data) {
             //  page=len % pageSize==0 ? len/pageSize : Math.floor(len/pageSize)+1;
             //alert(page);
            // countpage = allData.countpage
-          //  pagenow = allData.pagenow
+            pagenow = allData.pagenow
             //alert(pagenow);
         }
 
@@ -314,7 +316,7 @@ function getdet(){
         // console.info(pkey,clientid);
         if(confirm('确定删除么')){
             $.ajax({
-                url:"licenseDelete",
+                url:deleteUrl,
                 data:{"pkey":pkey},
                 type:"POST",
              //   dataType:"text",
